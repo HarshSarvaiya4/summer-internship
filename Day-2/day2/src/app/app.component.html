@@ -1,0 +1,13 @@
+
+{{name}}
+
+<button type="button" class="btn">Base class</button>
+<button type="button" class="btn btn-outline-primary" (click)="listen()" >Primary</button>
+
+<p *ngIf="visible">Hy {{name}}</p>
+
+<p *ngFor="let item of arr">{{item}}</p>
+
+<input type="text" [(ngModel)]="username">
+
+<router-outlet></router-outlet>
