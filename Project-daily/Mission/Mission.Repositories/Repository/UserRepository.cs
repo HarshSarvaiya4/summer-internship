@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Mission.Entities;
+using Mission.Entities.Helper;
 using Mission.Entities.Models;
 using Mission.Entities.ViewModels.Login;
 using Mission.Entities.ViewModels.User;
 using Mission.Repositories.IRepository;
+using System.Threading.Tasks;
 
 namespace Mission.Repositories.Repository
 {
@@ -12,7 +13,7 @@ namespace Mission.Repositories.Repository
     {
         private readonly MissionDbContext _context = dbContext;
 
-        public async Task<(UserLoginResponseModel? response, string message)> LogiUser(UserLoginRequestModel model) 
+        public async Task<(UserLoginResponseModel? response, string message)> LogiUser(UserLoginRequestModel model)
         {
             var user = await _context.Users.Where(u => u.EmailAddress.ToLower() == model.EmailAddress.ToLower()).FirstOrDefaultAsync();
 
@@ -26,7 +27,7 @@ namespace Mission.Repositories.Repository
                 return (null, "Password doesn't matched");
             }
 
-            var response = new UserLoginResponseModel() 
+            var response = new UserLoginResponseModel()
             {
                 Id = user.Id,
                 EmailAddress = user.EmailAddress,
@@ -42,7 +43,7 @@ namespace Mission.Repositories.Repository
 
         public async Task<List<UserResponseModel>> GetUsersAsync()
         {
-            return await _context.Users.Select(u => new UserResponseModel() 
+            return await _context.Users.Select(u => new UserResponseModel()
             {
                 Id = u.Id,
                 EmailAddress = u.EmailAddress,
@@ -66,8 +67,8 @@ namespace Mission.Repositories.Repository
             var user = new User()
             {
                 FirstName = model.FirstName,
-                EmailAddress= model.EmailAddress,
-                LastName= model.LastName,
+                EmailAddress = model.EmailAddress,
+                LastName = model.LastName,
                 PhoneNumber = model.PhoneNumber,
                 UserType = model.UserType,
                 Password = model.Password,
@@ -97,7 +98,7 @@ namespace Mission.Repositories.Repository
             };
         }
 
-        public async Task<(bool response, string message)> UpdateUserAsync(UpdateUserRequestModel model)
+        public async Task<(bool response, string message)> UpdateUserAsync(UpdateUserRequestModel model, string imageUploadPath)
         {
             var userInDb = _context.Users.Where(u => model.Id != u.Id && u.EmailAddress.ToLower() == model.EmailAddress.ToLower()).FirstOrDefault();
 
@@ -111,6 +112,19 @@ namespace Mission.Repositories.Repository
             if (user == null)
             {
                 return (false, "User not found");
+            }
+
+            if (model.RemoveImage && !string.IsNullOrEmpty(user.UserImage))
+            {
+                string oldImageFullPath = Path.Combine(imageUploadPath, user.UserImage.Replace("/", Path.DirectorySeparatorChar.ToString()));
+                if (File.Exists(oldImageFullPath))
+                    File.Delete(oldImageFullPath);
+            }
+
+            if (model.ProfileImage != null)
+            {
+                string newImagePath = await UploadFile.SaveImageAsync(model.ProfileImage, "UploadMissionImage/Images", imageUploadPath);
+                user.UserImage = newImagePath;
             }
 
             user.FirstName = model.FirstName;

@@ -236,7 +236,6 @@ D:\Summer-Internship\Project-daily\Mission\Mission.Api\obj\Debug\net8.0\Mission.
 D:\Summer-Internship\Project-daily\Mission\Mission.Api\obj\Debug\net8.0\Mission.Api.AssemblyInfoInputs.cache
 D:\Summer-Internship\Project-daily\Mission\Mission.Api\obj\Debug\net8.0\Mission.Api.AssemblyInfo.cs
 D:\Summer-Internship\Project-daily\Mission\Mission.Api\obj\Debug\net8.0\Mission.Api.csproj.CoreCompileInputs.cache
-D:\Summer-Internship\Project-daily\Mission\Mission.Api\obj\Debug\net8.0\Mission.Api.MvcApplicationPartsAssemblyInfo.cs
 D:\Summer-Internship\Project-daily\Mission\Mission.Api\obj\Debug\net8.0\Mission.Api.MvcApplicationPartsAssemblyInfo.cache
 D:\Summer-Internship\Project-daily\Mission\Mission.Api\obj\Debug\net8.0\Mission.Api.sourcelink.json
 D:\Summer-Internship\Project-daily\Mission\Mission.Api\obj\Debug\net8.0\rjimswa.dswa.cache.json
@@ -254,3 +253,4 @@ D:\Summer-Internship\Project-daily\Mission\Mission.Api\obj\Debug\net8.0\Mission.
 D:\Summer-Internship\Project-daily\Mission\Mission.Api\obj\Debug\net8.0\Mission.Api.genruntimeconfig.cache
 D:\Summer-Internship\Project-daily\Mission\Mission.Api\obj\Debug\net8.0\ref\Mission.Api.dll
 D:\Summer-Internship\Project-daily\Mission\Mission.Api\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+D:\Summer-Internship\Project-daily\Mission\Mission.Api\bin\Debug\net8.0\Microsoft.Extensions.ObjectPool.dll

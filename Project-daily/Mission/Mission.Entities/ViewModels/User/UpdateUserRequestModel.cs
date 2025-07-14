@@ -1,4 +1,7 @@
-﻿namespace Mission.Entities.ViewModels.User
+﻿using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Http;
+
+namespace Mission.Entities.ViewModels.User
 {
     public class UpdateUserRequestModel
     {
@@ -10,5 +13,9 @@
         public string UserType { get; set; }
 
         public bool RemoveImage { get; set; }
+
+        [JsonIgnore]
+        public IFormFile? ProfileImage { get; set; } = null;
+
     }
 }
